@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stash Logistics - Your Trusted Logistics Partner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-box"></i>
+                Stash Logistics
+            </a>
+            <div class="nav-menu">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#featured-services" class="nav-link">Logistics</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="openModal('login')">Log In</button>
+                <button class="btn-signup" onclick="openModal('signup')">Sign Up</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" style="padding-top: 120px;">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Your <span class="highlight">Reliable</span> Logistics Partner
+                </h1>
+                <p class="hero-subtitle">
+                    Streamlining your supply chain with innovative solutions and dedicated support.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Get Started
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-question-circle"></i>
+                        Learn More
+                    </button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Clients</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">1000+</span>
+                        <span class="stat-label">Deliveries</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Support</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card card-1">
+                    <i class="fas fa-truck"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>We ensure your goods arrive quickly and safely.</p>
+                </div>
+                <div class="hero-card card-2">
+                    <i class="fas fa-warehouse"></i>
+                    <h3>Secure Storage</h3>
+                    <p>State-of-the-art facilities to keep your inventory safe.</p>
+                </div>
+                <div class="hero-card card-3">
+                    <i class="fas fa-route"></i>
+                    <h3>Global Reach</h3>
+                    <p>Delivering your products worldwide with ease.</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg-elements">
+            <div class="floating-element element-1"></div>
+            <div class="floating-element element-2"></div>
+            <div class="floating-element element-3"></div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Explore our wide range of logistics services designed to meet your business needs.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Express Delivery</h3>
+                    <p>Fast and reliable delivery services for urgent shipments.</p>
+                    <ul>
+                        <li>Real-time Tracking</li>
+                        <li>Insurance Options</li>
+                        <li>24/7 Support</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Warehousing</h3>
+                    <p>Secure and efficient warehousing solutions for inventory management.</p>
+                    <ul>
+                        <li>Climate Control</li>
+                        <li>Inventory Management</li>
+                        <li>Security Systems</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Global Logistics</h3>
+                    <p>Comprehensive international shipping and logistics services.</p>
+                    <ul>
+                        <li>Customs Clearance</li>
+                        <li>Multi-Modal Transport</li>
+                        <li>Documentation</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3>Freight Forwarding</h3>
+                    <p>Efficient freight forwarding services for businesses of all sizes.</p>
+                    <ul>
+                        <li>Cost-Effective Solutions</li>
+                        <li>Route Optimization</li>
+                        <li>Timely Delivery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Simple steps to get your logistics sorted with Stash Logistics.</p>
+            </div>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Request a Quote</h3>
+                        <p>Fill out our online form to get a customized quote for your shipping needs.</p>
+                    </div>
+                    <div class="step-visual">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Schedule Pickup</h3>
+                        <p>Choose a convenient time for us to pick up your goods from your location.</p>
+                    </div>
+                    <div class="step-visual">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Track Your Shipment</h3>
+                        <p>Monitor your shipment's progress in real-time with our tracking system.</p>
+                    </div>
+                    <div class="step-visual">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Receive Delivery</h3>
+                        <p>Your goods are delivered safely and on time to the destination.</p>
+                    </div>
+                    <div class="step-visual">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Logistics Services Section -->
+    <section class="featured-services" id="featured-services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Logistics Services</h2>
+                <p>Explore top-rated logistics services tailored for your business needs.</p>
+            </div>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="featured-header">
+                        <div class="provider-info">
+                            <img src="https://via.placeholder.com/60" alt="Provider Logo" class="provider-logo">
+                            <div>
+                                <h3>SwiftMove Logistics</h3>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>4.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-tag">$499</div>
+                    </div>
+                    <div class="service-details">
+                        <p><i class="fas fa-truck"></i> Express Delivery</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Nationwide</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">Fast</span>
+                        <span class="tag">Reliable</span>
+                        <span class="tag">Insured</span>
+                    </div>
+                    <button class="featured-btn">Book Now</button>
+                </div>
+                <div class="featured-card premium">
+                    <span class="premium-badge">Premium</span>
+                    <div class="featured-header">
+                        <div class="provider-info">
+                            <img src="https://via.placeholder.com/60" alt="Provider Logo" class="provider-logo">
+                            <div>
+                                <h3>GlobalTrans Solutions</h3>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>5.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-tag">$799</div>
+                    </div>
+                    <div class="service-details">
+                        <p><i class="fas fa-globe"></i> International Shipping</p>
+                        <p><i class="fas fa-warehouse"></i> Secure Storage</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">Global</span>
+                        <span class="tag">Secure</span>
+                        <span class="tag">Expedited</span>
+                    </div>
+                    <button class="featured-btn">Book Now</button>
+                </div>
+                <div class="featured-card">
+                    <div class="featured-header">
+                        <div class="provider-info">
+                            <img src="https://via.placeholder.com/60" alt="Provider Logo" class="provider-logo">
+                            <div>
+                                <h3>CargoCare Experts</h3>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                    <span>3.5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-tag">$399</div>
+                    </div>
+                    <div class="service-details">
+                        <p><i class="fas fa-box"></i> Standard Delivery</p>
+                        <p><i class="fas fa-clock"></i> Flexible Scheduling</p>
+                    </div>
+                    <div class="service-tags">
+                        <span class="tag">Affordable</span>
+                        <span class="tag">Flexible</span>
+                    </div>
+                    <button class="featured-btn">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Partners Section -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Partners</h2>
+                <p>We collaborate with industry-leading partners to deliver exceptional logistics solutions.</p>
+            </div>
+            <div class="partners-logos">
+                <div class="partners-scroll">
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <!-- Duplicate for seamless loop -->
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                    <div class="partner-logo">
+                        <img src="https://via.placeholder.com/150" alt="Partner Logo">
+                    </div>
+                </div>
+            </div>
+            <div class="partner-stats">
+                <div class="stat-item">
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">Trucks</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Warehouses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Cities Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Get in touch with us for any inquiries or to request a quote.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Let's Talk Logistics</h2>
+                    <p>We're here to help you optimize your supply chain and streamline your logistics operations. Contact us today to discuss your needs and discover how we can assist you.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>123 Stash Logistics HQ, City, State</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(123) 456-7890</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>info@stashlogistics.com</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="#" class="footer-logo">
+                        <i class="fas fa-box"></i>
+                        Stash Logistics
+                    </a>
+                    <p>Your trusted partner for all your logistics needs. We provide reliable and efficient solutions to streamline your supply chain.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Express Delivery</a></li>
+                        <li><a href="#">Warehousing</a></li>
+                        <li><a href="#">Global Logistics</a></li>
+                        <li><a href="#">Freight Forwarding</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="#">123 Stash Logistics HQ, City, State</a></li>
+                        <li><a href="#">(123) 456-7890</a></li>
+                        <li><a href="#">info@stashlogistics.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Stash Logistics. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Authentication</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <button class="tab-btn active" onclick="openAuthForm('login')">Log In</button>
+                    <button class="tab-btn" onclick="openAuthForm('signup')">Sign Up</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form active">
+                    <form id="loginSubmit">
+                        <div class="form-group">
+                            <label for="loginEmail">Email</label>
+                            <input type="email" id="loginEmail" name="loginEmail" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="password-field">
+                                <input type="password" id="loginPassword" name="loginPassword" placeholder="Your Password" required>
+                                <button type="button" class="password-toggle" onclick="togglePasswordVisibility('loginPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-options">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn-primary full-width">Log In</button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="auth-form">
+                    <form id="signupSubmit">
+                        <div class="form-group form-row">
+                            <div>
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                            </div>
+                            <div>
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email</label>
+                            <input type="email" id="signupEmail" name="signupEmail" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <div class="password-field">
+                                <input type="password" id="signupPassword" name="signupPassword" placeholder="Your Password" required>
+                                <button type="button" class="password-toggle" onclick="togglePasswordVisibility('signupPassword')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" required>
+                                <option value="">Select Country</option>
+                                <option value="usa">United States</option>
+                                <option value="canada">Canada</option>
+                                <option value="uk">United Kingdom</option>
+                                <!-- Add more countries as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                I agree to the Terms and Conditions
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary full-width">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle modal and form functionality
+        const modal = document.getElementById("authModal");
+
+        function openModal(formType) {
+            modal.style.display = "block";
+            openAuthForm(formType);
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        function openAuthForm(formId) {
+            const forms = document.querySelectorAll('.auth-form');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            forms.forEach(form => form.classList.remove('active'));
+
+            document.getElementById(formId + 'Form').classList.add('active');
+            document.querySelector(`.tab-btn[onclick="openAuthForm('${formId}')"]`).classList.add('active');
+        }
+
+        function togglePasswordVisibility(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.parentNode.querySelector('.password-toggle i');
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.classList.remove('fa-eye');
+                toggleButton.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = "password";
+                toggleButton.classList.remove('fa-eye-slash');
+                toggleButton.classList.add('fa-eye');
+            }
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Basic form submission handling (you should add actual submission logic)
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Form submitted! (This is a demo)');
+        });
+
+        document.getElementById('loginSubmit').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Login submitted! (This is a demo)');
+        });
+
+        document.getElementById('signupSubmit').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Signup submitted! (This is a demo)');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
