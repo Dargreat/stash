@@ -1402,3 +1402,36 @@ html {
         transform: translateX(0);
     }
 }
+/* Mobile menu styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        z-index: 1000;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 999;
+    }
+    
+    .nav-menu.active {
+        display: flex;
+        animation: fadeInRight 0.3s ease-out;
+    }
+    
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 1.1rem;
+    }
+}
