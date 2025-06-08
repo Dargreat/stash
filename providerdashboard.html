@@ -1,0 +1,561 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stash Logistics - Service Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    :root {
+      --primary-blue: #1a5fad; 
+      --secondary-blue: #2a7bdb;
+      --light-blue: #e6f2ff;
+      --dark-blue: #0d4a8c;
+      --accent-blue: #3d8de0;
+      --white: #ffffff;
+      --light-gray: #f8f9fa;
+      --medium-gray: #e9ecef;
+      --dark-gray: #343a40;
+      --background: #f0f7ff;
+      --success-green: #28a745;
+      --warning-orange: #ffc107;
+      --error-red: #dc3545;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--dark-gray);
+      line-height: 1.6;
+      margin-bottom: 70px; /* space for fixed nav */
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background-color: var(--white);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+      display: flex;
+      align-items: center;
+    }
+
+    .logo i {
+      margin-right: 10px;
+      color: var(--secondary-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-gray);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+      position: relative;
+      padding: 8px 12px;
+      border-radius: 6px;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-blue);
+      background-color: var(--light-blue);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--primary-blue);
+    }
+
+    /* Bottom Fixed Message Navbar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: var(--white);
+      border-top: 1px solid var(--light-blue);
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 999;
+    }
+
+    .bottom-nav button {
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .bottom-nav button:hover {
+      background: var(--dark-blue);
+    }
+
+    /* Services Section */
+    .services-section {
+      padding: 4rem 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      margin-top: 3rem;
+      border: 1px solid var(--light-blue);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--dark-blue);
+      margin-bottom: 1rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .add-service-btn {
+      background: var(--success-green);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .add-service-btn:hover {
+      background: #218838;
+    }
+
+    /* Service Cards */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid var(--light-blue);
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .service-body {
+      padding: 1.5rem;
+    }
+
+    .service-detail {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed var(--light-blue);
+    }
+
+    .service-detail:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--dark-gray);
+      font-weight: 500;
+    }
+
+    .detail-label i {
+      color: var(--accent-blue);
+      font-size: 1.1rem;
+    }
+
+    .detail-value {
+      font-weight: 600;
+      color: var(--dark-blue);
+    }
+
+    .service-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 1.2rem;
+    }
+
+    .action-btn {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .action-btn.edit {
+      background: var(--accent-blue);
+      color: white;
+    }
+
+    .action-btn.delete {
+      background: var(--error-red);
+      color: white;
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: var(--dark-blue);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--medium-gray);
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    .modal-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn-close {
+      background: var(--light-blue);
+      color: var(--dark-blue);
+    }
+
+    .btn-post {
+      background: var(--success-green);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--white);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        display: none;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 0.8rem 0;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="logo">
+    <i class="fas fa-shipping-fast"></i>
+    <span>Stash Logistics</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+    <li><a href="#"><i class="fas fa-store"></i> Market Place</a></li>
+    <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+    <li><a href="#"><i class="fas fa-cogs"></i> Service</a></li>
+    <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
+  </ul>
+  <button class="mobile-menu-btn" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+</nav>
+
+<!-- Fixed Message Nav -->
+<div class="bottom-nav">
+  <button onclick="openModal()">💬 Messages</button>
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <h2 class="section-title">Your Services</h2>
+  <div class="services-header">
+    <button class="add-service-btn" onclick="openModal()">+ Add New Service</button>
+  </div>
+  <div class="services-grid" id="servicesGrid">
+    <!-- Example Services -->
+    <div class="service-card">
+      <div class="service-body">
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-weight-hanging"></i><span>Weight:</span></div>
+          <div class="detail-value">500 kg</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-tag"></i><span>Price:</span></div>
+          <div class="detail-value">₦85,000</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-map-marker-alt"></i><span>Location:</span></div>
+          <div class="detail-value">Lagos</div>
+        </div>
+        <div class="service-actions">
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete" onclick="deleteCard(this)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-body">
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-weight-hanging"></i><span>Weight:</span></div>
+          <div class="detail-value">1000 kg</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-tag"></i><span>Price:</span></div>
+          <div class="detail-value">₦150,000</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-map-marker-alt"></i><span>Location:</span></div>
+          <div class="detail-value">Abuja</div>
+        </div>
+        <div class="service-actions">
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete" onclick="deleteCard(this)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-body">
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-weight-hanging"></i><span>Weight:</span></div>
+          <div class="detail-value">300 kg</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-tag"></i><span>Price:</span></div>
+          <div class="detail-value">₦60,000</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-map-marker-alt"></i><span>Location:</span></div>
+          <div class="detail-value">Port Harcourt</div>
+        </div>
+        <div class="service-actions">
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete" onclick="deleteCard(this)">Delete</button>
+        </div>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-body">
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-weight-hanging"></i><span>Weight:</span></div>
+          <div class="detail-value">2000 kg</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-tag"></i><span>Price:</span></div>
+          <div class="detail-value">₦200,000</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-map-marker-alt"></i><span>Location:</span></div>
+          <div class="detail-value">Kano</div>
+        </div>
+        <div class="service-actions">
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete" onclick="deleteCard(this)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal for Adding Service -->
+<div class="modal" id="addServiceModal">
+  <div class="modal-content">
+    <h2>Add New Service</h2>
+    <div class="form-group">
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" placeholder="Enter weight in kg" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Price (₦)</label>
+      <input type="number" id="price" placeholder="Enter price" required>
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" placeholder="Enter location" required>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn-close" onclick="closeModal()">Cancel</button>
+      <button class="btn-post" onclick="postService()">Post Now</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('addServiceModal');
+
+  function openModal() {
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  function postService() {
+    const weight = document.getElementById('weight').value;
+    const price = document.getElementById('price').value;
+    const location = document.getElementById('location').value;
+
+    if (!weight || !price || !location) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `
+      <div class="service-body">
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-weight-hanging"></i><span>Weight:</span></div>
+          <div class="detail-value">${weight} kg</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-tag"></i><span>Price:</span></div>
+          <div class="detail-value">₦${parseInt(price).toLocaleString()}</div>
+        </div>
+        <div class="service-detail">
+          <div class="detail-label"><i class="fas fa-map-marker-alt"></i><span>Location:</span></div>
+          <div class="detail-value">${location}</div>
+        </div>
+        <div class="service-actions">
+          <button class="action-btn edit">Edit</button>
+          <button class="action-btn delete" onclick="deleteCard(this)">Delete</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('servicesGrid').appendChild(card);
+    closeModal();
+    document.getElementById('weight').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('location').value = '';
+  }
+
+  function deleteCard(button) {
+    button.closest('.service-card').remove();
+  }
+
+  function toggleMenu() {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.classList.toggle('active');
+  }
+</script>
+
+</body>
+</html>

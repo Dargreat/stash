@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stash Logistics - Service Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #1a5fad;
+            --secondary-blue: #2a7bdb;
+            --light-blue: #e6f2ff;
+            --dark-blue: #0d4a8c;
+            --accent-blue: #3d8de0;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --background: #f0f7ff;
+            --success-green: #28a745;
+            --warning-orange: #ffc107;
+            --error-red: #dc3545;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+            background-color: var(--light-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary-blue);
+        }
+
+        /* Hero Section Styles */
+        .hero {
+            background: var(--background);
+            color: var(--dark-gray);
+            padding: 5rem 5% 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--dark-blue);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--dark-gray);
+        }
+
+        .search-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            border: 2px solid var(--light-blue);
+        }
+
+        .search-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-option {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+        }
+
+        .search-option input, 
+        .search-option select {
+            width: 100%;
+            padding: 16px 20px 16px 52px;
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            background: var(--light-gray);
+            color: var(--dark-gray);
+        }
+
+        .search-option input:focus, 
+        .search-option select:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(61, 141, 224, 0.2);
+        }
+
+        .search-option i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .price-range-container {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 1.8rem;
+            margin-top: 1.5rem;
+            border: 1px solid var(--medium-gray);
+        }
+
+        .price-range-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .price-range-header h3 {
+            color: var(--dark-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .price-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .price-slider-container {
+            position: relative;
+            height: 8px;
+            background: #d1d1d1;
+            border-radius: 10px;
+            margin: 2rem 0 1rem;
+        }
+
+        .price-slider {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-blue) 0%, var(--primary-blue) 50%, var(--dark-blue) 100%);
+            border-radius: 10px;
+        }
+
+        .price-handle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 26px;
+            height: 26px;
+            background: var(--white);
+            border: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+
+        .price-handle:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .price-handle.min {
+            left: 25%;
+        }
+
+        .price-handle.max {
+            left: 75%;
+        }
+
+        .price-range-values {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .price-value-box {
+            background: var(--white);
+            border: 2px solid var(--light-blue);
+            border-radius: 10px;
+            padding: 15px 20px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .apply-btn {
+            background: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 10px;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .apply-btn i {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.5);
+        }
+
+        .apply-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Services Management Section */
+        .services-section {
+            padding: 4rem 5%;
+            background: var(--white);
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--light-blue);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .services-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .services-title h2 {
+            font-size: 2rem;
+            color: var(--dark-blue);
+        }
+
+        .services-title i {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            background: var(--light-blue);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .services-stats {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .services-count {
+            background: var(--light-blue);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .services-count i {
+            color: var(--accent-blue);
+        }
+
+        .refresh-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .refresh-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+
+        .services-content {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 3rem;
+            border: 1px solid var(--light-blue);
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 1rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--light-blue);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: var(--accent-blue);
+        }
+
+        .service-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-header i {
+            font-size: 1.8rem;
+        }
+
+        .service-header h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .service-body {
+            padding: 1.5rem;
+        }
+
+        .service-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px dashed var(--light-blue);
+        }
+
+        .service-detail:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        .detail-label i {
+            color: var(--accent-blue);
+            font-size: 1.1rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .service-price {
+            background: var(--light-blue);
+            padding: 0.8rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 700;
+            color: var(--primary-blue);
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.2rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .action-btn.ship-now {
+            background: var(--success-green);
+            color: white;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        .action-btn.ship-now:hover {
+            background: #218838;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+        }
+
+        .action-btn.talk-to-provider {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: 0 4px 10px rgba(61, 141, 224, 0.3);
+        }
+
+        .action-btn.talk-to-provider:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(61, 141, 224, 0.4);
+        }
+
+        .no-services {
+            text-align: center;
+            padding: 4rem 0;
+            display: none; /* Hidden since we have services */
+        }
+
+        .no-services-icon {
+            font-size: 5rem;
+            color: var(--medium-gray);
+            margin-bottom: 1.5rem;
+            opacity: 0.7;
+        }
+
+        .no-services-title {
+            font-size: 2rem;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+
+        .no-services-text {
+            font-size: 1.2rem;
+            color: var(--dark-gray);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .filter-tag {
+            background: var(--white);
+            border: 1px solid var(--light-blue);
+            border-radius: 30px;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            color: var(--dark-gray);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .filter-tag i {
+            color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        .clear-filters-btn {
+            background: transparent;
+            color: var(--error-red);
+            border: 2px solid var(--error-red);
+            border-radius: 8px;
+            padding: 12px 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 1.5rem auto 0;
+        }
+
+        .clear-filters-btn:hover {
+            background: var(--error-red);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .search-options {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 1.5rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.8rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 3rem 5% 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .search-container {
+                padding: 1.8rem;
+            }
+            
+            .price-range-values {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .price-value-box {
+                margin: 0;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .services-stats {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .services-content {
+                padding: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Stash Logistics</span>
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-store"></i> Market Place</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#"><i class="fas fa-cogs"></i> Service</a></li>
+            <li><a href="#"><i class="fas fa-phone"></i> Contact</a></li>
+        </ul>
+        
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Amazon for Logistics</h1>
+            <p>Find the perfect logistics solution for your business and personal needs</p>
+            
+            <div class="search-container">
+                <div class="search-options">
+                    <div class="search-option">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search services..." id="searchServices">
+                    </div>
+                    
+                    <div class="search-option">
+                        <i class="fas fa-list"></i>
+                        <select id="categories">
+                            <option value="">All Categories</option>
+                            <option value="shipping">Shipping</option>
+                            <option value="warehousing">Warehousing</option>
+                            <option value="delivery">Last-Mile Delivery</option>
+                            <option value="freight">Freight Forwarding</option>
+                            <option value="storage">Storage Solutions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-option">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <select id="locations">
+                            <option value="">All Locations</option>
+                            <option value="lagos">Lagos</option>
+                            <option value="abuja">Abuja</option>
+                            <option value="port-harcourt">Port Harcourt</option>
+                            <option value="kano">Kano</option>
+                            <option value="ibadan">Ibadan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="search-option">
+                        <i class="fas fa-sort"></i>
+                        <select id="sorting">
+                            <option value="newest">Newest First</option>
+                            <option value="lowest">Price: Low to High</option>
+                            <option value="highest">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="price-range-container">
+                    <div class="price-range-header">
+                        <h3>Price Range (₦)</h3>
+                    </div>
+                    
+                    <div class="price-slider-container">
+                        <div class="price-slider"></div>
+                        <div class="price-handle min"></div>
+                        <div class="price-handle max"></div>
+                    </div>
+                    
+                    <div class="price-labels">
+                        <span>1,000</span>
+                        <span>200,000</span>
+                        <span>500,000</span>
+                    </div>
+                    
+                    <div class="price-range-values">
+                        <div class="price-value-box">
+                            <span>Min: ₦<span id="minPrice">50,000</span></span>
+                        </div>
+                        <div class="price-value-box">
+                            <span>Max: ₦<span id="maxPrice">350,000</span></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="apply-btn">Apply Filters <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Management Section -->
+    <section class="services-section">
+        <div class="services-header">
+            <div class="services-title">
+                <i class="fas fa-cubes"></i>
+                <h2>Manage Your Services</h2>
+            </div>
+            
+            <div class="services-stats">
+                <div class="services-count">
+                    <i class="fas fa-box"></i>
+                    <span>Showing <span id="serviceCount">4</span> services</span>
+                </div>
+                <button class="refresh-btn">
+                    <i class="fas fa-sync-alt"></i>
+                    Refresh
+                </button>
+            </div>
+        </div>
+        
+        <div class="filter-tags">
+            <div class="filter-tag">
+                <span>Category: Warehousing</span>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="filter-tag">
+                <span>Location: Lagos</span>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="filter-tag">
+                <span>Min Price: ₦50,000</span>
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        
+        <div class="services-content">
+            <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-truck"></i>
+                        <h3>Swift Logistics Ltd</h3>
+                    </div>
+                    <div class="service-body">
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-user"></i>
+                                <span>Provider:</span>
+                            </div>
+                            <div class="detail-value">Swift Logistics Ltd</div>
+                        </div>
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Capacity:</span>
+                            </div>
+                            <div class="detail-value">500 kg</div>
+                        </div>
+                        <div class="service-price">
+                            <i class="fas fa-tag"></i>
+                            <span>₦85,000</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="action-btn ship-now">
+                                <i class="fas fa-shipping-fast"></i>
+                                Ship Now
+                            </button>
+                            <button class="action-btn talk-to-provider">
+                                <i class="fas fa-comments"></i>
+                                Talk to Provider
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service Card 2 -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-ship"></i>
+                        <h3>Ocean Freight Solutions</h3>
+                    </div>
+                    <div class="service-body">
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-user"></i>
+                                <span>Provider:</span>
+                            </div>
+                            <div class="detail-value">Ocean Freight Solutions</div>
+                        </div>
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Capacity:</span>
+                            </div>
+                            <div class="detail-value">2,000 kg</div>
+                        </div>
+                        <div class="service-price">
+                            <i class="fas fa-tag"></i>
+                            <span>₦120,000</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="action-btn ship-now">
+                                <i class="fas fa-shipping-fast"></i>
+                                Ship Now
+                            </button>
+                            <button class="action-btn talk-to-provider">
+                                <i class="fas fa-comments"></i>
+                                Talk to Provider
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service Card 3 -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-warehouse"></i>
+                        <h3>Metro Storage Systems</h3>
+                    </div>
+                    <div class="service-body">
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-user"></i>
+                                <span>Provider:</span>
+                            </div>
+                            <div class="detail-value">Metro Storage Systems</div>
+                        </div>
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Capacity:</span>
+                            </div>
+                            <div class="detail-value">1,500 kg</div>
+                        </div>
+                        <div class="service-price">
+                            <i class="fas fa-tag"></i>
+                            <span>₦95,000</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="action-btn ship-now">
+                                <i class="fas fa-shipping-fast"></i>
+                                Ship Now
+                            </button>
+                            <button class="action-btn talk-to-provider">
+                                <i class="fas fa-comments"></i>
+                                Talk to Provider
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service Card 4 -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <i class="fas fa-plane"></i>
+                        <h3>Air Express Cargo</h3>
+                    </div>
+                    <div class="service-body">
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-user"></i>
+                                <span>Provider:</span>
+                            </div>
+                            <div class="detail-value">Air Express Cargo</div>
+                        </div>
+                        <div class="service-detail">
+                            <div class="detail-label">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Capacity:</span>
+                            </div>
+                            <div class="detail-value">300 kg</div>
+                        </div>
+                        <div class="service-price">
+                            <i class="fas fa-tag"></i>
+                            <span>₦65,000</span>
+                        </div>
+                        <div class="service-actions">
+                            <button class="action-btn ship-now">
+                                <i class="fas fa-shipping-fast"></i>
+                                Ship Now
+                            </button>
+                            <button class="action-btn talk-to-provider">
+                                <i class="fas fa-comments"></i>
+                                Talk to Provider
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="no-services">
+                <i class="fas fa-box-open no-services-icon"></i>
+                <h3 class="no-services-title">No services found</h3>
+                <p class="no-services-text">Try adjusting your filters or search terms to find matching services</p>
+                
+                <button class="clear-filters-btn">
+                    <i class="fas fa-filter"></i>
+                    Clear All Filters
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Price slider functionality
+        const minPriceEl = document.getElementById('minPrice');
+        const maxPriceEl = document.getElementById('maxPrice');
+        const minHandle = document.querySelector('.price-handle.min');
+        const maxHandle = document.querySelector('.price-handle.max');
+        const priceSlider = document.querySelector('.price-slider');
+        
+        // Initial values
+        let minPrice = 50000;
+        let maxPrice = 350000;
+        
+        function updatePriceDisplay() {
+            minPriceEl.textContent = minPrice.toLocaleString();
+            maxPriceEl.textContent = maxPrice.toLocaleString();
+            
+            // Update slider visual position
+            minHandle.style.left = `${(minPrice - 1000) / 499000 * 100}%`;
+            maxHandle.style.left = `${(maxPrice - 1000) / 499000 * 100}%`;
+            
+            // Update the colored bar between handles
+            const minPercent = (minPrice - 1000) / 499000 * 100;
+            const maxPercent = (maxPrice - 1000) / 499000 * 100;
+            priceSlider.style.left = `${minPercent}%`;
+            priceSlider.style.width = `${maxPercent - minPercent}%`;
+        }
+        
+        // Initialize slider
+        updatePriceDisplay();
+        
+        // Handle dragging functionality
+        let activeHandle = null;
+        
+        minHandle.addEventListener('mousedown', () => {
+            activeHandle = minHandle;
+            document.addEventListener('mousemove', handleDrag);
+        });
+        
+        maxHandle.addEventListener('mousedown', () => {
+            activeHandle = maxHandle;
+            document.addEventListener('mousemove', handleDrag);
+        });
+        
+        document.addEventListener('mouseup', () => {
+            activeHandle = null;
+            document.removeEventListener('mousemove', handleDrag);
+        });
+        
+        function handleDrag(e) {
+            if (!activeHandle) return;
+            
+            const sliderContainer = document.querySelector('.price-slider-container');
+            const rect = sliderContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            let percent = (x / rect.width) * 100;
+            
+            if (percent < 0) percent = 0;
+            if (percent > 100) percent = 100;
+            
+            const price = Math.round(1000 + (percent / 100) * 499000);
+            
+            if (activeHandle === minHandle) {
+                if (price < maxPrice) {
+                    minPrice = price;
+                }
+            } else {
+                if (price > minPrice) {
+                    maxPrice = price;
+                }
+            }
+            
+            updatePriceDisplay();
+        }
+        
+        // Form submission
+        document.querySelector('.apply-btn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchServices').value;
+            const category = document.getElementById('categories').value;
+            const location = document.getElementById('locations').value;
+            const sort = document.getElementById('sorting').value;
+            
+            // This data would be sent to backend in a real application
+            const filterData = {
+                searchTerm,
+                category,
+                location,
+                sort,
+                minPrice,
+                maxPrice
+            };
+            
+            console.log('Filter data to be sent to backend:', filterData);
+            alert('Filters applied! This would trigger a backend search with these parameters.');
+        });
+
+        // Refresh button functionality
+        document.querySelector('.refresh-btn').addEventListener('click', function() {
+            this.classList.add('refreshing');
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+            
+            setTimeout(() => {
+                this.classList.remove('refreshing');
+                this.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
+                alert('Services list refreshed!');
+            }, 1500);
+        });
+
+        // Clear filters functionality
+        document.querySelector('.clear-filters-btn').addEventListener('click', function() {
+            // Reset all filter values
+            document.getElementById('searchServices').value = '';
+            document.getElementById('categories').value = '';
+            document.getElementById('locations').value = '';
+            document.getElementById('sorting').value = 'newest';
+            
+            minPrice = 50000;
+            maxPrice = 350000;
+            updatePriceDisplay();
+            
+            // Clear filter tags
+            document.querySelector('.filter-tags').innerHTML = '';
+            
+            // Show message
+            alert('All filters have been cleared!');
+        });
+
+        // Remove individual filter tag
+        document.querySelectorAll('.filter-tag i').forEach(icon => {
+            icon.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+        
+        // Ship Now button functionality
+        document.querySelectorAll('.action-btn.ship-now').forEach(button => {
+            button.addEventListener('click', function() {
+                const provider = this.closest('.service-card').querySelector('.service-header h3').textContent;
+                alert(`Starting shipment process with ${provider}`);
+            });
+        });
+        
+        // Talk to Provider button functionality
+        document.querySelectorAll('.action-btn.talk-to-provider').forEach(button => {
+            button.addEventListener('click', function() {
+                const provider = this.closest('.service-card').querySelector('.service-header h3').textContent;
+                alert(`Initiating chat with ${provider}`);
+            });
+        });
+    </script>
+</body>
+</html>
