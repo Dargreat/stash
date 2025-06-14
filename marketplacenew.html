@@ -688,10 +688,10 @@
           <label class="filter-label">Price Range</label>
           <select class="filter-select" id="priceRange">
             <option value="">Any Price</option>
-            <option value="0-100">₹0 - ₹100</option>
-            <option value="100-300">₹100 - ₹300</option>
-            <option value="300-500">₹300 - ₹500</option>
-            <option value="500+">₹500+</option>
+            <option value="0-100">$0 - $100</option>
+            <option value="100-300">$100 - $300</option>
+            <option value="300-500">$300 - $500</option>
+            <option value="500+">$500+</option>
           </select>
         </div>
         
@@ -956,7 +956,7 @@
 
         <div class="service-pricing">
           <div class="price-info">
-            <div class="price">₹${service.basePrice}</div>
+            <div class="price">$${service.basePrice}</div>
             <div class="price-note">Starting from</div>
           </div>
         </div>
@@ -1086,7 +1086,7 @@
     function getQuote(serviceId = null) {
       if (serviceId) {
         const service = servicesData.find(s => s.id === serviceId);
-        alert(`Getting detailed quote for ${service.name}...\n\nBase price: ₹${service.basePrice}\nFinal price depends on distance and package details.`);
+        alert(`Getting detailed quote for ${service.name}...\n\nBase price: $${service.basePrice}\nFinal price depends on distance and package details.`);
       } else {
         alert('Please fill in the pickup and drop-off locations to get an accurate quote.');
       }
